@@ -1,7 +1,16 @@
-import {useTable} from "react-table"
+import { Column, useTable } from 'react-table';
+import { PubOverview } from '../types/types';
+import { Table } from 'semantic-ui-react';
+import React from 'react';
 
-function Table({ columns, data }}) {
-  // Use the state and functions returned from useTable to build your UI
+function PubOverviewTable({
+  columns,
+  data,
+}: {
+  columns: Column<PubOverview>[];
+  data: PubOverview[];
+}) {
+  // Use the state and functions returned from useTable to build UI
   const {
     getTableProps,
     getTableBodyProps,
@@ -11,34 +20,38 @@ function Table({ columns, data }}) {
   } = useTable({
     columns,
     data,
-  })
+  });
 
-    // Render the UI for your table
-    return (
-        <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map(headerGroup => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                ))}
-              </tr>
+  // Render the UI for table
+  return (
+    <Table {...getTableProps()}>
+      <Table.Header>
+        {headerGroups.map((headerGroup) => (
+          <Table.Row {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
+              <Table.HeaderCell {...column.getHeaderProps()}>
+                {column.render('Header')}
+              </Table.HeaderCell>
             ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
-              prepareRow(row)
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map(cell => {
-                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                  })}
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      )
+          </Table.Row>
+        ))}
+      </Table.Header>
+      <Table.Body {...getTableBodyProps()}>
+        {rows.map((row) => {
+          prepareRow(row);
+          return (
+            <Table.Row>
+              {row.cells.map((cell) => (
+                <Table.Cell {...cell.getCellProps()}>
+                  {cell.render('Cell')}
+                </Table.Cell>
+              ))}
+            </Table.Row>
+          );
+        })}
+      </Table.Body>
+    </Table>
+  );
 }
 
-export default Table
+export default PubOverviewTable;

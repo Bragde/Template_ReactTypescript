@@ -17,10 +17,7 @@
     "prettier/react" // disables react-specific linting rules that conflict with prettier
   ],
   "rules": {
-    "prettier/prettier": ["error",{
-      "endOfLine": "auto"
-      }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/forbid-prop-types": [0, { "forbid": ["any"] }],
     "react/prop-types": 0,
     "no-unused-vars": "warn",
@@ -38,7 +35,7 @@
     "unused-imports/no-unused-imports-ts": "error",
     "unused-imports/no-unused-vars-ts": [
       "warn",
-      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" },
+      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
     ]
   },
   "env": {

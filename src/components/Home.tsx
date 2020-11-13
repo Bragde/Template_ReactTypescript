@@ -4,7 +4,7 @@ import PubOverviewTable from './Table';
 import { PubOverview } from '../types/types';
 import * as MockData from '../mockdata/mockdata';
 
-const Home = () => {
+const Home = (): JSX.Element => {
   const columns: Column<PubOverview>[] = React.useMemo(
     () => [
       {

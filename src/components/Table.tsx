@@ -1,4 +1,4 @@
-import { Column, useTable } from 'react-table';
+import { Column, useSortBy, useTable } from 'react-table';
 import { PubOverview } from '../types/types';
 import { Table } from 'semantic-ui-react';
 import React from 'react';
@@ -9,7 +9,7 @@ function PubOverviewTable({
 }: {
   columns: Column<PubOverview>[];
   data: PubOverview[];
-}) {
+}): JSX.Element {
   // Use the state and functions returned from useTable to build UI
   const {
     getTableProps,
@@ -17,10 +17,13 @@ function PubOverviewTable({
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({
-    columns,
-    data,
-  });
+  } = useTable(
+    {
+      columns,
+      data,
+    },
+    useSortBy,
+  );
 
   // Render the UI for table
   return (
@@ -29,7 +32,9 @@ function PubOverviewTable({
         {headerGroups.map((headerGroup) => (
           <Table.Row {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <Table.HeaderCell {...column.getHeaderProps()}>
+              <Table.HeaderCell
+                {...column.getHeaderProps(column.getSortByToggleProps())}
+              >
                 {column.render('Header')}
               </Table.HeaderCell>
             ))}

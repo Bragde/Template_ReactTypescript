@@ -1,6 +1,6 @@
 import { Column, useSortBy, useTable } from 'react-table';
 import { PubOverview } from '../types/types';
-import { Table } from 'semantic-ui-react';
+import { Icon, Table } from 'semantic-ui-react';
 import React from 'react';
 
 function PubOverviewTable({
@@ -30,12 +30,22 @@ function PubOverviewTable({
     <Table {...getTableProps()}>
       <Table.Header>
         {headerGroups.map((headerGroup) => (
-          <Table.Row {...headerGroup.getHeaderGroupProps()}>
+          <Table.Row
+            {...headerGroup.getHeaderGroupProps()}
+            key={headerGroup.id}
+          >
             {headerGroup.headers.map((column) => (
               <Table.HeaderCell
                 {...column.getHeaderProps(column.getSortByToggleProps())}
+                key={column.id}
               >
                 {column.render('Header')}
+                {column.isSorted && (
+                  <Icon
+                    name={column.isSortedDesc ? 'caret down' : 'caret up'}
+                    size="large"
+                  />
+                )}
               </Table.HeaderCell>
             ))}
           </Table.Row>
@@ -45,9 +55,9 @@ function PubOverviewTable({
         {rows.map((row) => {
           prepareRow(row);
           return (
-            <Table.Row>
-              {row.cells.map((cell) => (
-                <Table.Cell {...cell.getCellProps()}>
+            <Table.Row key={row.id}>
+              {row.cells.map((cell, index) => (
+                <Table.Cell {...cell.getCellProps()} key={index}>
                   {cell.render('Cell')}
                 </Table.Cell>
               ))}

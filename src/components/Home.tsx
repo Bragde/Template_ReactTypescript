@@ -36,6 +36,7 @@ const Home = (): JSX.Element => {
 
   return (
     <>
+      <h2>KROGAR</h2>
       <AddPubBtn />
       <PubOverviewTable columns={columns} data={data} />
     </>

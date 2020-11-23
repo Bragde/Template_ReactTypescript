@@ -3,7 +3,7 @@ import { Column } from 'react-table';
 import PubOverviewTable from './Table';
 import { PubOverview } from '../types/types';
 import * as MockData from '../mockdata/mockdata';
-import AddPubBtn from './AddPub';
+import AddPubBtn from './AddPubBtn';
 
 const Home = (): JSX.Element => {
   const columns: Column<PubOverview>[] = React.useMemo(
